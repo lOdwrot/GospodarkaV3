@@ -1,0 +1,34 @@
+@media (max-width: 767px) {
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    body {
+        padding-top: 50px;
+    }
+}
+
+.frame-item {
+    width: 300px;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid rgb(232, 232, 232);
+    background: white;
+    margin-bottom: 40px;
+}
+
+.tab-container {
+    width: 400px;
+    padding: 10px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column;
+    border: 1px solid rgb(232, 232, 232);
+    border-radius: 15px;
+}
+
+.image-container{
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}

@@ -1,0 +1,34 @@
+#container
+{
+	width: 400px;
+	padding: 60px;
+	margin-left: auto;
+	margin-right:auto;
+	margin-top: 80px;
+}
+
+h1
+{
+    letter-spacing: 2px
+}
+
+#button {
+ 
+    /*Krok 2: Podstawowe style*/
+    display: block;
+    height: 40px;
+    width: 250px;
+    background: #1E9DFF;
+	font-size: 18px;
+	color: white;
+    /*border: 2px solid rgba(65, 63, 191, 0.59);*/
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	letter-spacing: 2px;
+}
+
+#button:hover
+{
+	background-color: #0067E5;
+}
