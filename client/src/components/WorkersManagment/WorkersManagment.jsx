@@ -11,6 +11,11 @@ export default () => {
         const resp = await axios.get('/user')
         setWorkers(resp.data.filter(v => v.role === 'worker' || v.manager))
     }
+
+    const deleteWorker = async (workerId) => {
+        const result = await axios.delete('/user/', {userId: workerId})
+        setWorkers(workers.filter(v => v._id !== workerId))
+    }
     
     
     const columns = [{
@@ -38,7 +43,7 @@ export default () => {
         render: (value, row, index) => (
             <div>
                 <Button icon='edit' onClick={() => setEditedWorker(row)}/>
-                <Button icon='delete' onClick={() => setWorkers(workers.filter(v => v._id !== value))}/>
+                <Button icon='delete' onClick={() => deleteWorker(value)}/>
             </div>
         )
     }]
