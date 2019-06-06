@@ -13,7 +13,9 @@ export default () => {
     }
 
     const deleteWorker = async (workerId) => {
-        const result = await axios.delete('/user/', {userId: workerId})
+        const result = await axios.delete('/user', {
+            data: {userId: workerId}
+        })
         setWorkers(workers.filter(v => v._id !== workerId))
     }
     
