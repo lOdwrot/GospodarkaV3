@@ -2,22 +2,48 @@ import React, {useState} from 'react'
 import { Input, Button, Form } from 'antd'
 import styles from './Login.module.scss'
 import axios from 'axios'
+import history from '../../history'
 
 const FormItem = Form.Item
 
 export default ({
-    logIn
+    setUserRole
 }) => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+
+    const loginFlow = async () => {
+        const resp = await axios.post(
+            '/user/login',
+            {
+              mail: login,
+              password: password
+            }
+        )
+      
+        if(!resp.data) {
+            return setErrorMessage('Invalid Credentials')
+        }
+        
+        const role = resp.data.role
+        setUserRole(role)
+        if (role === 'worker') history.push('/workerModule')
+        if (role === 'manager') history.push('/managerModule')
+        if (role === 'boss') history.push('/bossModule')
+    }
 
     return (
         <div>
+            <Button onClick={() => history.push('/counter')}>A</Button>
             <div className={styles['container']}>
                 <div className={'frame-item'}>
                     Here Will Be App Logo
                 </div>               
                 <div className={'frame-item'}>
+                    <div style={{width: '100%', color: 'red', textAlign: 'center'}}>
+                        {errorMessage}
+                    </div>
                     <FormItem help={'Login'}>
                         <Input
                             value={login}
@@ -36,7 +62,7 @@ export default ({
                     <Button
                         style={{width: '100%'}}
                         disabled={!login || !password}
-                        onClick={() => logIn(login, password)}
+                        onClick={loginFlow}
                     >
                         Log In
                     </Button>

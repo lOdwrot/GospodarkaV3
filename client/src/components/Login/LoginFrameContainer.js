@@ -8,16 +8,7 @@ const mapStateToProps = (state) => ({
   })
   
 const mapDispatchToProps = (dispatch) => ({
-    logIn: async (login, password) => {
-      debugger
-      const loginResp = await axios.post(
-        '/api/Account/Login',
-        {
-          Mail: login,
-          Password: password
-        })
-      dispatch(setUserRole('worker'))
-    }
+  setUserRole: async (userRole) => dispatch(setUserRole(userRole)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginFrame)

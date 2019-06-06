@@ -13,6 +13,7 @@ export const connect = ({DB_USER, DB_PASSWORD, DB_PORT, DB_NAME}) => {
 
         // HERE CREATE ALL COLLECTIONS
         db.createCollection('USER', (err, collection) => {})
+        db.createCollection('USER', (err, collection) => {})
         resolve(db)
         console.log('Database conected')
     })
