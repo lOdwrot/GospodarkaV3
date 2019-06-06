@@ -1,0 +1,1 @@
+db.getCollection('USER').insertMany([{"mail":"nowak@wp.pl", "password": "123", "role": "worker"}, {"mail":"kowalski@wp.pl", "password": "123", "role": "manager"}, {"mail":"rys@wp.pl", "password": "123", "role": "worker"}])
