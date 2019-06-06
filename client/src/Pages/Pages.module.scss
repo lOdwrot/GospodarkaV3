@@ -1,0 +1,11 @@
+.worker {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto;
+    grid-gap: 20px;
+}
+
+.user-info {
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;
+}

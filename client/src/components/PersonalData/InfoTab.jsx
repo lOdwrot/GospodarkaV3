@@ -9,11 +9,13 @@ export default ({
     grade,
     managerName,
     currentBuild,
-    imageURL
+    imageURL,
+    mail
 }) => {
     const [isEditMode, setEditMode] = useState(false)
     const [editedName, setName] = useState(name)
     const [editedSurname, setSurname] = useState(surname)
+    const [editedMail, setMail] = useState(mail)
 
     const cancelEdit = () => {
         setEditMode(false)
@@ -31,7 +33,12 @@ export default ({
             label: 'Surname',
             value: editedSurname,
             set: setSurname
-        }
+        },
+        {
+            label: 'Mail',
+            value: editedMail,
+            set: setMail
+        },
     ]
 
     const notEditableFields = [

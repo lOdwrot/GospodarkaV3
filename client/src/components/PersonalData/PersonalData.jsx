@@ -3,11 +3,4 @@ import InfoTab from './InfoTab'
 
 export default ({
     userData
-}) => {
-    
-    return (
-        <div>
-            <InfoTab {...userData}/>
-        </div>
-    )
-}
+}) => (<InfoTab {...userData}/>)

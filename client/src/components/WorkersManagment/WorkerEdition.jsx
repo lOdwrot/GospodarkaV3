@@ -24,6 +24,10 @@ const fields = [
         label: 'Grade',
         apiName: 'grade',
     },
+    {
+        label: 'Mail',
+        apiName: 'mail',
+    },
 ]
 
 export default ({

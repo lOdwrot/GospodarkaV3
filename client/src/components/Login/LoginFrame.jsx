@@ -7,7 +7,8 @@ import history from '../../history'
 const FormItem = Form.Item
 
 export default ({
-    setUserRole
+    setUserRole,
+    setUser
 }) => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
@@ -28,6 +29,7 @@ export default ({
         
         const role = resp.data.role
         setUserRole(role)
+        setUser(resp.data)
         if (role === 'worker') history.push('/workerModule')
         if (role === 'manager') history.push('/managerModule')
         if (role === 'boss') history.push('/bossModule')
@@ -35,7 +37,6 @@ export default ({
 
     return (
         <div>
-            <Button onClick={() => history.push('/counter')}>A</Button>
             <div className={styles['container']}>
                 <div className={'frame-item'}>
                     Here Will Be App Logo

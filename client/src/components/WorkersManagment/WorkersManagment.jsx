@@ -1,17 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import { Skeleton, Table, Button } from 'antd';
 import WorkerEdition from './WorkerEdition';
+import axios from 'axios';
 
 export default () => {
     const [workers, setWorkers] = useState(null)
     const [editedWorker, setEditedWorker] = useState(null)
 
-    const fetchWorkers = () => new Promise((resolve) => setTimeout(() => resolve(
-        [
-            {name: 'Bogdan', surname: 'Kowalski', id: '1'},
-            {name: 'Zbigniew', surname: 'Walaszek', id: '2'}
-        ]
-    ), 1000)).then(setWorkers)
+    const fetchWorkers = async () => {
+        const resp = await axios.get('/user')
+        setWorkers(resp.data.filter(v => v.role === 'worker' || v.manager))
+    }
     
     
     const columns = [{
@@ -27,13 +26,19 @@ export default () => {
         sorter: (a, b) => a.surname > b.surname ? 1 : -1,
         sortDirections: ['descend', 'ascend'],
     }, {
+        title: 'Mail',
+        dataIndex: 'mail',
+        key: 'mail',
+        sorter: (a, b) => a.surname > b.surname ? 1 : -1,
+        sortDirections: ['descend', 'ascend'],
+    }, {
         title: 'Actions',
-        dataIndex: 'id',
-        key: 'id',
+        dataIndex: '_id',
+        key: '_id',
         render: (value, row, index) => (
             <div>
                 <Button icon='edit' onClick={() => setEditedWorker(row)}/>
-                <Button icon='delete' onClick={() => setWorkers(workers.filter(v => v.id !== value))}/>
+                <Button icon='delete' onClick={() => setWorkers(workers.filter(v => v._id !== value))}/>
             </div>
         )
     }]
@@ -43,9 +48,9 @@ export default () => {
     }, [])
 
     const saveWorker = (worker) => {
-        if(editedWorker.id) {
+        if(editedWorker._id) {
             const nextWorkers = [...workers]
-            nextWorkers[nextWorkers.findIndex(v => v.id === editedWorker.id)] = worker
+            nextWorkers[nextWorkers.findIndex(v => v._id === editedWorker._id)] = worker
             setWorkers(nextWorkers)
         } else {
             setWorkers([...workers, worker])

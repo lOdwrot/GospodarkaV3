@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => ({
     userData: {
-        name: state.personalData.name,
-        surname: state.personalData.surname,
-        grade: state.personalData.grade,
-        managerName: state.personalData.managerName,
-        currentBuild: state.personalData.currentBuild,
-        imageURL: state.personalData.imageURL,
+        name: state.personalData.user.name,
+        surname: state.personalData.user.surname,
+        grade: state.personalData.user.grade,
+        managerName: state.personalData.user.managerName,
+        currentBuild: state.personalData.user.currentBuild,
+        imageURL: state.personalData.user.imageURL,
+        mail: state.personalData.user.mail,
     }
   })
   
