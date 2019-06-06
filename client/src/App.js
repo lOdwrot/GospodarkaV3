@@ -19,25 +19,7 @@ import WorkersManagment from './components/WorkersManagment/WorkersManagment';
 
 
 const App = ({userRole}) => {
-  // return (
-  //   <Layout>
-  //     <Route exact path='/' component={Home} />
-  //     <Route path='/counter' component={Counter} />
-  //     <Route path='/fetchdata' component={FetchData} />
-  //     <Route path='/workerModule' component={WorkerPage} />
-  //     <Route path='/managerModule' component={Manager} />
-  //     <Route path='/bossModule' component={Boss} />
-  //     <Route path='/bossBuildingManagment' component={BossBuildingManagment} />
-  //     <Route path='/worker' component={WorkerPage} />
-  //     <Route path='/building' component={Building} />
-  //     <Route path='/inventory' component={InventoryManagment} />
-  //     <Route path='/workersManagments' component={WorkersManagment} />
-  //     <Route path='/editdBuilding/:id' component={EditBuilding} />
-  //   </Layout>)
-
-
-  return userRole 
-  ? (
+  return (
     <Layout>
       <Route exact path='/' component={Home} />
       <Route path='/counter' component={Counter} />
@@ -48,9 +30,27 @@ const App = ({userRole}) => {
       <Route path='/bossBuildingManagment' component={BossBuildingManagment} />
       <Route path='/worker' component={WorkerPage} />
       <Route path='/building' component={Building} />
+      <Route path='/inventory' component={InventoryManagment} />
+      <Route path='/workersManagments' component={WorkersManagment} />
       <Route path='/editdBuilding/:id' component={EditBuilding} />
     </Layout>)
-  : <Login/>
+
+
+  // return userRole 
+  // ? (
+  //   <Layout>
+  //     <Route exact path='/' component={Home} />
+  //     <Route path='/counter' component={Counter} />
+  //     <Route path='/fetchdata' component={FetchData} />
+  //     <Route path='/workerModule' component={WorkerPage} />
+  //     <Route path='/managerModule' component={Manager} />
+  //     <Route path='/bossModule' component={Boss} />
+  //     <Route path='/bossBuildingManagment' component={BossBuildingManagment} />
+  //     <Route path='/worker' component={WorkerPage} />
+  //     <Route path='/building' component={Building} />
+  //     <Route path='/editdBuilding/:id' component={EditBuilding} />
+  //   </Layout>)
+  //: <Login/>
 }
 
 const mapStateToProps = (state) => ({
