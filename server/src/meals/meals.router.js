@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import * as mealControler from './meal.controler'
+import * as mealControler from './meals.controler'
 
 // Grzesek, jbc to do parametrów z roznych czesci requesta mozesz dobrac sie tak
 // request.headers.token,
@@ -9,8 +9,8 @@ import * as mealControler from './meal.controler'
 const router = Router()
 
 // Ten endpoint jbc uderza na ściezke: http://localhost:5000/meals/menu
-router.post('/menu', async (req, res) => {
-    res.json(await mealControler.meal(req.body.mealDescription))
+router.post('/meal', async (req, res) => {
+    res.json(await mealControler.meal(req.body.mealId))
 })
 
 router.get('/', async (req, res) => {

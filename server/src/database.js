@@ -31,7 +31,7 @@ export const connect = ({DB_USER, DB_PASSWORD, DB_PORT, DB_NAME}) => {
         })
         db.createCollection('MEAL', (err, collection) => {
         })
-        db.createCollection('ORDER', (err, collection) => {
+        db.createCollection('ORDERS', (err, collection) => {
         })
 
         resolve(db)
@@ -41,6 +41,6 @@ export const connect = ({DB_USER, DB_PASSWORD, DB_PORT, DB_NAME}) => {
 }
 
 export const getCollectionUser = () => db.collection('USER')
-export const getCollectionMeal = () => db.collection('MEAL')
-export const getCollectionOrder = () => db.collection('ORDER')
+export const getCollectionMeals = () => db.collection('MEAL')
+export const getCollectionOrders = () => db.collection('ORDER')
 export default db

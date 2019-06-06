@@ -1,8 +1,8 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import userRouter from './user/user.router'
-import mealRouter from './meal/meal.router'
-import orderRouter from './order/order.router'
+import mealsRouter from './meals/meals.router'
+import orderRouter from './orders/orders.router'
 import {connect} from './database'
 
 const PORT = process.env.PORT || 5000
@@ -25,8 +25,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
 app.use('/user', userRouter)
-app.use('/meal', mealRouter)
-app.use('/order', orderRouter)
+app.use('/meals', mealsRouter)
+app.use('/orders', orderRouter)
 
 app.get('/', (req, res) => {
     res.send({Test: 'Ok'})
