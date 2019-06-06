@@ -6,10 +6,14 @@ export const getAllUsers = async () => await getCollectionUser()
                                                 .toArray()
 
 export const login = async (mail, password) => await getCollectionUser()
-                                                        .findOne({mail, password})
+                                                        .findOne(
+                                                            {mail, password}
+                                                        )
 
 export const getUser = async (userId) => await getCollectionUser()
-                                                       .findOne({_id: new mongo.ObjectID(userId)})
+                                                       .findOne(
+                                                           {_id: new mongo.ObjectID(userId)}
+                                                        )
 
 export const updateUser = async (newData) => await getCollectionUser()
                                                         .updateOne(

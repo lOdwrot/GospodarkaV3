@@ -13,7 +13,7 @@ router.post('/login', async (req, res) => {
     res.json(await userControler.login(req.body.mail, req.body.password))
 })
 
-router.post('/get', async (req, res) => {
+router.post('/getUser', async (req, res) => {
     res.json(await userControler.getUser(req.body.user))
 })
 
