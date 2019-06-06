@@ -10,7 +10,11 @@ const router = Router()
 
 // Ten endpoint jbc uderza na ściezke: http://localhost:5000/orders/order
 router.post('/order', async (req, res) => {
-    res.json(await ordersControler.order(req.body.mail))
+    res.json(await ordersControler.userOrder(req.body.userId))
+})
+
+router.post('/day-order', async (req, res) => {
+    res.json(await ordersControler.userDayOrder(req.body.userId, req.body.date))
 })
 
 router.get('/', async (req, res) => {

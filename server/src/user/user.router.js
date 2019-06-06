@@ -13,8 +13,24 @@ router.post('/login', async (req, res) => {
     res.json(await userControler.login(req.body.mail, req.body.password))
 })
 
+router.post('/getUser', async (req, res) => {
+    res.json(await userControler.getUser(req.body.user))
+})
+
 router.get('/', async (req, res) => {
     res.send(await userControler.getAllUsers())
+})
+
+router.put('/update', async (req, res) => {
+    res.json(await userControler.updateUser(req.body.user))
+})
+
+router.post('/insert', async (req,res) =>{
+    res.json(await userControler.insertUser(req.body.user))
+})
+
+router.post('/delete', async (req,res) =>{
+    res.json(await userControler.deleteUser(req.body.user))
 })
 
 export default router
