@@ -1,6 +1,8 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import userRouter from './user/user.router'
+import mealsRouter from './meals/meals.router'
+import orderRouter from './orders/orders.router'
 import {connect} from './database'
 import cors from 'cors'
 
@@ -25,6 +27,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
 
 app.use('/user', userRouter)
+app.use('/meals', mealsRouter)
+app.use('/orders', orderRouter)
 
 app.get('/', (req, res) => {
     res.send({Test: 'Ok'})
