@@ -21,15 +21,15 @@ router.get('/', async (req, res) => {
     res.send(await userControler.getAllUsers())
 })
 
-router.put('/update', async (req, res) => {
+router.put('/', async (req, res) => {
     res.json(await userControler.updateUser(req.body.user))
 })
 
-router.post('/insert', async (req,res) =>{
+router.post('/', async (req,res) =>{
     res.json(await userControler.insertUser(req.body.user))
 })
 
-router.post('/delete', async (req,res) =>{
+router.delete('/', async (req,res) =>{
     res.json(await userControler.deleteUser(req.body.user))
 })
 
