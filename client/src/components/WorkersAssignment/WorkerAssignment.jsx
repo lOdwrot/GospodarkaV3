@@ -1,22 +1,31 @@
 import React, {useState, useEffect} from 'react'
 import { List, Skeleton, Button } from 'antd';
 import AddModal from '../HelperComponents/AddModal';
+import axios from "axios"
 
-export default () => {
+export default ({projectId="abc123"}) => {
     const [asignedWorkers, setAssignedWorkers] = useState(null)
     const [availableWorkes, setAvailableWorkers] = useState([
         {name: 'Adam', surname: 'Bogdański'},
         {name: 'Adam', surname: 'Zalewski'},
     ])
 
-    const fetchWorkers = () => new Promise((resolve) => setTimeout(() => resolve(
-        [
-            {name: 'Bogdan', surname: 'Kowalski'},
-            {name: 'Zbigniew', surname: 'Walaszek'}
-        ]
-    ), 1000)).then(setAssignedWorkers)
+    const fetchWorkers = () => axios.get('/user').then(resp=>{
+        const allWorkers = resp.data
+                                .filter(v=>v.role == "worker")
+                                .sort((a,b)=>a.surname < b.surname ? 1 : -1)
+        setAvailableWorkers(allWorkers.filter(v=> v.projectId == null ))
+        setAssignedWorkers(allWorkers.filter(v=>v.projectId == projectId))
 
-    const removeWorker = (worker) => setAssignedWorkers(asignedWorkers.filter(v => v !== worker))
+    })
+
+
+    const removeWorker = (worker) => {
+        axios.put(
+            "/user/assign",
+            {userId:worker._id, projectId:null}
+        ).then(resp=>fetchWorkers())
+    }
     
     useEffect(() => {
         fetchWorkers()
@@ -47,7 +56,14 @@ export default () => {
                     <AddModal
                         data={availableWorkes}
                         usedProperties={['name', 'surname']}
-                        apply={(data) => setAssignedWorkers([...asignedWorkers, ...data])}
+                        apply={(data) => {
+                            Promise.all(
+                                data.map(v=>axios.put(
+                                    "/user/assign",
+                                    {userId:v._id, projectId}
+                                ))
+                            ).then(fetchWorkers)
+                        }}
                     />
                 </div>
             }

@@ -5,6 +5,8 @@ import mealsRouter from './meals/meals.router'
 import orderRouter from './orders/orders.router'
 import projectRouter from './project/project.router'
 import equipmentRouter from './equipment/equipment.router'
+import documentRouter from './document/document.router'
+import userdocRouter from './userdoc/userdoc.router'
 import {connect} from './database'
 import cors from 'cors'
 
@@ -21,6 +23,7 @@ connect({DB_USER, DB_PASSWORD, DB_PORT, DB_NAME})
 app.use((req, res, next) => {
     let fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl
     let currentDate = new Date();
+    req.body && console.log("#params: ", JSON.stringify(req.body))
     console.log('Time: ', currentDate.toLocaleString(), ' Reqest address: ', fullUrl, '\n')
     next()
 })
@@ -33,6 +36,8 @@ app.use('/meals', mealsRouter)
 app.use('/orders', orderRouter)
 app.use('/project', projectRouter)
 app.use('/equipment', equipmentRouter)
+app.use('/document', documentRouter)
+app.use('/userdoc', userdocRouter)
 
 app.get('/', (req, res) => {
     res.send({Test: 'Ok'})

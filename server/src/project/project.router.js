@@ -17,11 +17,11 @@ router.get('/', async (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-    res.json(await projectControler.updateProject(req.body.newData))
+    res.json(await projectControler.updateProject(req.body))
 })
 
 router.post('/', async (req,res) =>{
-    res.json(await projectControler.insertProject(req.body.newProject))
+    res.json(await projectControler.insertProject(req.body))
 })
 
 router.delete('/', async (req,res) =>{

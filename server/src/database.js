@@ -5,9 +5,9 @@ const IS_INIT = false
 
 const initUsers = (collection) => {
   collection.insertMany([
-    {"mail":"nowak@wp.pl", "password": "123", "name": "Jan", "surname": "Nowak", "address": "ul. Nowa 1 Wrocław", "phone": "123456789", "role": "worker", "grade": "5", "project": "-"},
-    {"mail":"kowalski@wp.pl", "password": "123", "name": "Adam", "surname": "Kowalski", "address": "ul. Kwiatowa 12 Wrocław", "phone": "223546745", "role": "manager","grade": "5", "project": "-"},
-    {"mail":"rys@wp.pl", "password": "123", "name": "Krzysztof", "surname": "Rys", "address": "ul. Stara 41 Wrocław", "phone": "768549393", "role": "worker", "grade": "5", "project": "-"}
+    {"mail":"nowak@wp.pl", "password": "123", "name": "Jan", "surname": "Nowak", "address": "ul. Nowa 1 Wrocław", "phone": "123456789", "role": "worker", "grade": "5", "projectId": null},
+    {"mail":"kowalski@wp.pl", "password": "123", "name": "Adam", "surname": "Kowalski", "address": "ul. Kwiatowa 12 Wrocław", "phone": "223546745", "role": "manager","grade": "5", "projectId": null},
+    {"mail":"rys@wp.pl", "password": "123", "name": "Krzysztof", "surname": "Rys", "address": "ul. Stara 41 Wrocław", "phone": "768549393", "role": "worker", "grade": "5", "projectId": null}
   ])
 }
 
@@ -59,6 +59,12 @@ export const connect = ({DB_USER, DB_PASSWORD, DB_PORT, DB_NAME}) => {
         db.createCollection('EQUIPMENT', (err, collection) => {
           if(IS_INIT) initEquipments(collection)
         })
+        db.createCollection('DOCUMENT', (err, collection) => {
+          
+        })
+        db.createCollection('USERDOC', (err, collection) => {
+          
+        })
 
         resolve(db)
         console.log('Database conected')
@@ -71,4 +77,6 @@ export const getCollectionMeals = () => db.collection('MEAL')
 export const getCollectionOrders = () => db.collection('ORDER')
 export const getCollectionProject = () => db.collection('PROJECT')
 export const getCollectionEquipment = () => db.collection('EQUIPMENT')
+export const getCollectionDocument = () => db.collection('DOCUMENT')
+export const getCollectionUserDoc = () => db.collection('USERDOC')
 export default db

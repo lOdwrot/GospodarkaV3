@@ -1,7 +1,7 @@
 db.getCollection('USER').insertMany([
-    {"mail":"nowak@wp.pl", "password": "123", "name": "Jan", "surname": "Nowak", "address": "ul. Nowa 1 Wrocław", "phone": "123456789", "role": "worker", "grade": "5", "project": "-"},
-    {"mail":"kowalski@wp.pl", "password": "123", "name": "Adam", "surname": "Kowalski", "address": "ul. Kwiatowa 12 Wrocław", "phone": "223546745", "role": "manager","grade": "5", "project": "-"},
-    {"mail":"rys@wp.pl", "password": "123", "name": "Krzysztof", "surname": "Rys", "address": "ul. Stara 41 Wrocław", "phone": "768549393", "role": "worker", "grade": "5", "project": "-"}
+    {"mail":"nowak@wp.pl", "password": "123", "name": "Jan", "surname": "Nowak", "address": "ul. Nowa 1 Wrocław", "phone": "123456789", "role": "worker", "grade": "5", "projectId": null},
+    {"mail":"kowalski@wp.pl", "password": "123", "name": "Adam", "surname": "Kowalski", "address": "ul. Kwiatowa 12 Wrocław", "phone": "223546745", "role": "manager","grade": "5", "projectId": null},
+    {"mail":"rys@wp.pl", "password": "123", "name": "Krzysztof", "surname": "Rys", "address": "ul. Stara 41 Wrocław", "phone": "768549393", "role": "worker", "grade": "5", "projectId": null}
 ])
 
 db.getCollection('MEAL').insertMany([
@@ -17,7 +17,7 @@ db.getCollection('ORDER').insertMany([
 db.getCollection('PROJECT').insertMany([
     {"startDate":"2019-04-04", "endDate":"2019-08-08", "name":"Budowa Biedronki", "location":"ul. Morska 11 Wrocław", "status":"in progres"},
     {"startDate":"2019-06-04", "endDate":"2020-08-08", "name":"Budowa biurowca", "location":"ul. Wiślana 1 Wrocław", "status":"in progres"},
-    {"startDate":"2018-04-04", "endDate":"2018-08-08", "name":"Budowa Biedronki", "location":"ul. Morska 11 Wrocław", "status":"done"},
+    {"startDate":"2018-04-04", "endDate":"2018-08-08", "name":"Budowa Lidla", "location":"ul. Szewska 11 Wrocław", "status":"done"}
 ])
 
 db.getCollection('EQUIPMENT').insertMany([

@@ -27,8 +27,8 @@ export const deleteEquipment = async (equipmentId) => await getCollectionEquipme
                                                                 {_id: new mongo.ObjectID(equipmentId)}
                                                             )
 
-export const assignEquipment = async (equipmentId, project) => await getCollectionUser()
+export const assignEquipment = async (equipmentId, projectid) => await getCollectionUser()
                                                             .updateOne(
                                                                 {_id : new mongo.ObjectID(equipmentId)},
-                                                                { $set: { project : project} }
+                                                                { $set: { projectid }}
                                                             )

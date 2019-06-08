@@ -11,7 +11,7 @@ const router = Router()
 // Ten endpoint jbc uderza na ściezke: http://localhost:5000/user/login
 
 router.post('/getEquipment', async (req, res) => {
-    res.json(await equipmentControler.getEquipments(req.body.equipmentId))
+    res.json(await equipmentControler.getEquipment(req.body.equipmentId))
 })
 
 router.get('/', async (req, res) => {
@@ -19,19 +19,19 @@ router.get('/', async (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-    res.json(await equipmentControler.updateEquipment(req.body.newData))
+    res.json(await equipmentControler.updateEquipmen(req.body))
 })
 
 router.post('/', async (req,res) =>{
-    res.json(await equipmentControler.insertEquipments(req.body.newEquipment))
+    res.json(await equipmentControler.insertEquipment(req.body))
 })
 
 router.delete('/', async (req,res) =>{
-    res.json(await equipmentControler.deleteEquipments(req.body.equipmentId))
+    res.json(await equipmentControler.deleteEquipment(req.body.equipmentId))
 })
 
 router.put('/assign', async (req, res) => {
-    res.json(await userControler.assignEquipment(req.body.equipmentId, req.body.project))
+    res.json(await userControler.assignEquipment(req.body.equipmentId, req.body.projectId))
 })
 
 export default router

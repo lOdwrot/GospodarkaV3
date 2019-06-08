@@ -22,11 +22,11 @@ router.get('/', async (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-    res.json(await userControler.updateUser(req.body.newData))
+    res.json(await userControler.updateUser(req.body))
 })
 
 router.post('/', async (req,res) =>{
-    res.json(await userControler.insertUser(req.body.newUser))
+    res.json(await userControler.insertUser(req.body))
 })
 
 router.delete('/', async (req,res) =>{
@@ -38,7 +38,7 @@ router.put('/rate', async (req, res) => {
 })
 
 router.put('/assign', async (req, res) => {
-    res.json(await userControler.assignUser(req.body.userId, req.body.project))
+    res.json(await userControler.assignUser(req.body.userId, req.body.projectId))
 })
 
 export default router
