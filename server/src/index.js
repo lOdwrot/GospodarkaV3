@@ -3,6 +3,8 @@ import bodyParser from 'body-parser'
 import userRouter from './user/user.router'
 import mealsRouter from './meals/meals.router'
 import orderRouter from './orders/orders.router'
+import projectRouter from './project/project.router'
+import equipmentRouter from './equipment/equipment.router'
 import {connect} from './database'
 import cors from 'cors'
 
@@ -29,6 +31,8 @@ app.use(bodyParser.json())
 app.use('/user', userRouter)
 app.use('/meals', mealsRouter)
 app.use('/orders', orderRouter)
+app.use('/project', projectRouter)
+app.use('/equipment', equipmentRouter)
 
 app.get('/', (req, res) => {
     res.send({Test: 'Ok'})

@@ -30,3 +30,15 @@ export const deleteUser = async (userId) => await getCollectionUser()
                                                             .deleteOne(
                                                                 {_id: new mongo.ObjectID(userId)}
                                                             )
+
+export const rateUser = async (userId, grade) => await getCollectionUser()
+                                                            .updateOne(
+                                                                {_id : new mongo.ObjectID(userId)},
+                                                                { $set: { grade : grade} }
+                                                            )
+
+export const assignUser = async (userId, project) => await getCollectionUser()
+                                                            .updateOne(
+                                                                {_id : new mongo.ObjectID(userId)},
+                                                                { $set: { project : project} }
+                                                            )
