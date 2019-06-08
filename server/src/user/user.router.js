@@ -33,4 +33,12 @@ router.delete('/', async (req,res) =>{
     res.json(await userControler.deleteUser(req.body.userId))
 })
 
+router.put('/rate', async (req, res) => {
+    res.json(await userControler.rateUser(req.body.userId, req.body.rating))
+})
+
+router.put('/assign', async (req, res) => {
+    res.json(await userControler.assignUser(req.body.userId, req.body.project))
+})
+
 export default router
