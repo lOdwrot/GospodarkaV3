@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Modal} from 'antd'
 import BuildingDetails from '../BuildingDetails/BuildingDetails';
 
-export default ({buildingId, isEditIcon=false}) => {
+export default ({projectId, isEditIcon=false}) => {
     const [isOpen, setOpen] = useState(false)
 
     const cloaseModal = () => setOpen(false)
@@ -20,7 +20,7 @@ export default ({buildingId, isEditIcon=false}) => {
                 <div style={{display: 'flex'}}>
                     <BuildingDetails
                         isEditMode={true}
-                        buildingId={buildingId}
+                        projectId={projectId}
                         saveCallBack={cloaseModal}
                     />
                 </div>

@@ -7,7 +7,7 @@ export default (props) => {
     return (
         <BuildingDetails
             isEditMode={true}
-            buildingId={props.match.params.id}
+            projectId={props.match.params.id}
         />
     )
 }
