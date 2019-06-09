@@ -21,9 +21,9 @@ export const updateUser = async (data) => await getCollectionUser()
                                                             {$set: {...data, _id: new mongo.ObjectID(data._id)}}
                                                         )
 
-export const insertUser = async (newUser) => await getCollectionUser()
+export const insertUser = async (data) => await getCollectionUser()
                                                             .insertOne(
-                                                                newUser
+                                                                { ...data, role: "worker" }
                                                             )
 
 
