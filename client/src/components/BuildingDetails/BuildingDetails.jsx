@@ -18,9 +18,8 @@ const fields = [
 
 export default ({
     isEditMode=false,
-    buildingId=null,
-    saveCallBack,
-    projectId
+    projectId=null,
+    saveCallBack
 }) => {
     const [buildingDetails, setBuildingDetails] = useState(null)
     const [editedBuildingDetails, setEditedBuildingDetails] = useState(null)
@@ -31,11 +30,16 @@ export default ({
 
     const fetchBuildingDetails = async () => {
         const resp = await axios.get('/project')
-  
-        setEditedBuildingDetails(resp.data)
-        setBuildingDetails(resp.data)
+        setEditedBuildingDetails(resp.data.find(v=>v._id === projectId))
+        setBuildingDetails(resp.data.find(v=>v._id === projectId))
+        
     }
 
+    
+    const updateBuildingDetalis = async () => {
+        const resp = await axios.put('/project', editedBuildingDetails)
+        fetchBuildingDetails()
+    }
 
     const fetchavailableManagers = async () => {
         const resp = await axios.get('/user')
@@ -45,7 +49,7 @@ export default ({
 
 
     useEffect(() => {
-        if(!buildingId) {
+        if(!projectId) {
             setEditedBuildingDetails({})
             setBuildingDetails({})
             fetchavailableManagers()
@@ -88,7 +92,7 @@ export default ({
                                     value={editedBuildingDetails[v.apiName] || ''}
                                     onChange={(e) => {
                                         setSaveRequired(true)
-                                        setEditedBuildingDetails({...editedBuildingDetails, [v.apiName]: e.target.name})
+                                        setEditedBuildingDetails({...editedBuildingDetails, [v.apiName]: e.target.value})
                                     }}
                                     placeholder={v.label}
                                     disabled={!isEditMode}
@@ -102,7 +106,7 @@ export default ({
                             style={{ width: 150 }} 
                             value={editedBuildingDetails.managerId}
                             onChange={(val) => setEditedBuildingDetails({...editedBuildingDetails, managerId: val})}>
-                            {availableManagers.map(v => <Option key={v.id} value={v.id}>{`${v.name} ${v.surname}`}</Option>)}
+                            {availableManagers.map(v => <Option key={v._id} value={v._id}>{`${v.name} ${v.surname}`}</Option>)}
                         </Select>
                     </FormItem>
                     {
@@ -113,7 +117,9 @@ export default ({
                                 setSaveRequired(false)
                                 saveCallBack && saveCallBack(editedBuildingDetails)
                             }}>Cancel</Button>
-                            <Button disabled={!saveRequired}>Save</Button>
+                            <Button onClick={() => {
+                                updateBuildingDetalis(buildingDetails)
+                            }} disabled={!saveRequired}>Save</Button>
                         </div>
                     }
                 </div>

@@ -15,9 +15,9 @@ db.getCollection('ORDER').insertMany([
 ])
 
 db.getCollection('PROJECT').insertMany([
-    {"startDate":"2019-04-04", "endDate":"2019-08-08", "name":"Budowa Biedronki", "location":"ul. Morska 11 Wrocław", "status":"in progres"},
-    {"startDate":"2019-06-04", "endDate":"2020-08-08", "name":"Budowa biurowca", "location":"ul. Wiślana 1 Wrocław", "status":"in progres"},
-    {"startDate":"2018-04-04", "endDate":"2018-08-08", "name":"Budowa Lidla", "location":"ul. Szewska 11 Wrocław", "status":"done"}
+    {"startDate":"2019-04-04", "endDate":"2019-08-08", "name":"Budowa Biedronki", "location":"ul. Morska 11 Wrocław", "status":"in progres", "managerId": null},
+    {"startDate":"2019-06-04", "endDate":"2020-08-08", "name":"Budowa biurowca", "location":"ul. Wiślana 1 Wrocław", "status":"in progres", "managerId": null},
+    {"startDate":"2018-04-04", "endDate":"2018-08-08", "name":"Budowa Lidla", "location":"ul. Szewska 11 Wrocław", "status":"done", "managerId": null}
 ])
 
 db.getCollection('EQUIPMENT').insertMany([
