@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 })
 
 router.put('/', async (req, res) => {
-    res.json(await equipmentControler.updateEquipmen(req.body))
+    res.json(await equipmentControler.updateEquipment(req.body))
 })
 
 router.post('/', async (req,res) =>{
