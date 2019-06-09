@@ -18,6 +18,20 @@ export default () => {
         })
         setWorkers(workers.filter(v => v._id !== workerId))
     }
+
+    const updateWorker = async (worker) => {
+        const result = await axios.put('/user', {
+            data: worker
+        })
+        setWorkers(workers.filter(v => v._id !== worker._id))
+    }
+
+    const addWorker = async (worker) => {
+        const result = await axios.post('/user', {
+            data: worker
+        })
+        setWorkers(workers.filter(v => v._id !== worker._id))
+    }
     
     
     const columns = [{

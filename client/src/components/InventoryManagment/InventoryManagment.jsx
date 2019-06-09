@@ -1,10 +1,35 @@
 import React, { useState, useEffect } from 'react'
 import { Skeleton, Table, Input, InputNumber, Button } from 'antd';
-
+import axios from "axios"
 
 export default () => {
     const [inventory, setInventory] = useState(null) 
     const [editedItems, setEditedItems] = useState([])
+
+    const fetchInventory = () => axios.get('/equipment').then(resp=>{
+        const allInventory = resp.data
+                                .sort((a,b)=>a.name < b.name ? 1 : -1)
+         setInventory(allInventory)
+
+    })
+
+    useEffect(() => {
+        fetchInventory()
+    }, [])
+
+    const addInventory = (inventory) =>{
+        axios.post(
+            "/equipment",
+            {name:inventory.name, projectId:null}
+        ).then(resp=>fetchInventory())
+    }
+
+    const updateInventory = (inventory) =>{
+        axios.put(
+            "/equipment",
+            {name:inventory}
+        ).then(resp=>fetchInventory())
+    }
 
     const replaceItemProperty = (id, property, value) => {
         const itemIndex = inventory.findIndex(v => v.id === id)
@@ -48,17 +73,14 @@ export default () => {
             : <Button icon='edit' onClick={() => setEditedItems([...editedItems, value])}/>
     }]
 
-    const fetchInventory = () => new Promise((resolve) => setTimeout(() => resolve(
-        [
-            {name: 'Koparka', quantity: 3, id: '1'},
-            {name: 'Dzwig', quantity: 1, id: '2'},
-            {name: 'Walec', quantity: 3, id: '3'},
-        ]
-    ), 1000)).then(setInventory)
-    
-    useEffect(() => {
-        fetchInventory()
-    }, [])
+    // const fetchInventory = () => new Promise((resolve) => setTimeout(() => resolve(
+    //     [
+    //         {name: 'Koparka', quantity: 3, id: '1'},
+    //         {name: 'Dzwig', quantity: 1, id: '2'},
+    //         {name: 'Walec', quantity: 3, id: '3'},
+    //     ]
+    // ), 1000)).then(setInventory)
+
 
     if(!inventory) return <Skeleton/>
 

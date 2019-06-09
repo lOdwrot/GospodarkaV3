@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Modal, Select, Form } from 'antd'
+import axios from "axios"
 
 const Option = Select.Option;
 const FormItem = Form.Item
@@ -14,6 +15,24 @@ export default () => {
         {name: 'Zbigniew', surname: 'Walaszek', id: '2'}
     ])
 
+    const fetchWorkers = () => axios.get('/user').then(resp=>{
+        const allWorkers = resp.data
+                                .filter(v=>v.role == "worker")
+                                .sort((a,b)=>a.surname < b.surname ? 1 : -1)
+        setAvailableWorkers(allWorkers.filter(v=> v.projectId == null ))
+
+    })
+
+    useEffect(() => {
+        fetchWorkers()
+    }, [])
+
+    const rateWorker = (workerId, grade) => {
+        axios.put(
+            "/user/rate",
+            {userId:workerId, grade}
+        ).then(resp=>fetchWorkers())
+    }
 
     const cloaseModal = () => setOpen(false)
     const openModal = () => setOpen(true)
@@ -32,6 +51,7 @@ export default () => {
                         key="Save"
                         disabled={!grade || !workerId}
                         onClick={() => {
+                            rateWorker(workerId, grade)
                             cloaseModal()
                         }}>
                         Save
@@ -44,7 +64,7 @@ export default () => {
                             style={{ width: 250 }} 
                             value={workerId}
                             onChange={setWorkerId}>
-                            {availableWorkers.map(v => <Option key={v.id} value={v.id}>{v.name + ' ' + v.surname}</Option>)}
+                            {availableWorkers.map(v => <Option key={v._id} value={v._id}>{v.name + ' ' + v.surname}</Option>)}
                         </Select>
                     </FormItem>
                     <FormItem help={'Grade'}>
