@@ -19,18 +19,16 @@ export default () => {
         setWorkers(workers.filter(v => v._id !== workerId))
     }
 
-    const updateWorker = async (worker) => {
-        const result = await axios.put('/user', {
-            data: worker
-        })
-        setWorkers(workers.filter(v => v._id !== worker._id))
+    const updateWorker = async (data) => {
+        const resp = await axios.put('/user', data )
+        fetchWorkers()
     }
 
     const addWorker = async (worker) => {
         const result = await axios.post('/user', {
             data: worker
         })
-        setWorkers(workers.filter(v => v._id !== worker._id))
+        //setWorkers(resp.data.filter(v => v.role === 'worker' || v.manager))
     }
     
     
@@ -72,6 +70,7 @@ export default () => {
         if(editedWorker._id) {
             const nextWorkers = [...workers]
             nextWorkers[nextWorkers.findIndex(v => v._id === editedWorker._id)] = worker
+            updateWorker(worker)
             setWorkers(nextWorkers)
         } else {
             setWorkers([...workers, worker])

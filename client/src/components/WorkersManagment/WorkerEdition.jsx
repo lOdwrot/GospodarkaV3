@@ -39,7 +39,7 @@ export default ({
 
     return (
         <Modal
-            title="Create Building"
+            title="Dane pracownika"
             visible={true}
             onCancel={cancel}
             footer={[

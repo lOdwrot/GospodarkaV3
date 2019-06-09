@@ -15,10 +15,10 @@ export const getUser = async (userId) => await getCollectionUser()
                                                            {_id: new mongo.ObjectID(userId)}
                                                         )
 
-export const updateUser = async (newData) => await getCollectionUser()
+export const updateUser = async (data) => await getCollectionUser()
                                                         .updateOne(
-                                                            {_id: new mongo.ObjectID(newData._id)},
-                                                            {$set: {...newData, _id: new mongo.ObjectID(newData._id)}}
+                                                            {_id: new mongo.ObjectID(data._id)},
+                                                            {$set: {...data, _id: new mongo.ObjectID(data._id)}}
                                                         )
 
 export const insertUser = async (newUser) => await getCollectionUser()
