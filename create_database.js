@@ -21,8 +21,8 @@ db.getCollection('PROJECT').insertMany([
 ])
 
 db.getCollection('EQUIPMENT').insertMany([
-    {"name":"Koparka czerwona", "status":"Free"},
-    {"name":"Koparka niebieska", "status":"Free"},
-    {"name":"Betoniarka 1", "status":"Free"},
-    {"name":"Walec czerwony", "status":"Free"}
+    {"name":"Koparka czerwona", "projectId": null},
+    {"name":"Koparka niebieska", "projectId": null},
+    {"name":"Betoniarka 1", "projectId": null},
+    {"name":"Walec czerwony", "projectId": null}
 ])

@@ -1,23 +1,30 @@
 import React, {useState, useEffect} from 'react'
 import { List, Skeleton, Button } from 'antd';
 import AddModal from '../HelperComponents/AddModal';
+import axios from "axios"
 
-export default () => {
+export default ({projectId="abc123"}) => {
     const [asignedMachines, setAssignedMachines] = useState(null)
     const [availableMachines, setAvailableMachines] = useState([
         {name: 'Walec'},
         {name: 'Dzwig'},
     ])
 
-    const fetchMachines = () => new Promise((resolve) => setTimeout(() => resolve(
-        [
-            {name: 'Koparka'},
-            {name: 'Młot Pneumatyczny'},
-        ]
-    ), 1000)).then(setAssignedMachines)
+    const fetchMachines = () => axios.get('/equipment').then(resp=>{
+        const allMachines = resp.data
+                                .sort((a,b)=>a.name < b.name ? 1 : -1)
+        setAvailableMachines(allMachines.filter(v=> v.projectId == null ))
+        setAssignedMachines(allMachines.filter(v=>v.projectId == projectId))
 
-    const removeWorker = (worker) => setAssignedMachines(asignedMachines.filter(v => v !== worker))
-    
+    })
+
+    const removeMachine = (machine) => {
+        axios.put(
+            "/equipment/assign",
+            {equipmentId:machine._id, projectId:null}
+        ).then(resp=>fetchMachines())
+    }
+
     useEffect(() => {
         fetchMachines()
     }, [])
@@ -39,7 +46,7 @@ export default () => {
                             <List.Item>
                                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
                                     <div>{`${item.name}`}</div>
-                                    <Button shape="circle" icon="delete" onClick={() => removeWorker(item)}/>
+                                    <Button shape="circle" icon="delete" onClick={() => removeMachine(item)}/>
                                 </div>
                             </List.Item>
                         )}
@@ -47,7 +54,14 @@ export default () => {
                     <AddModal
                         data={availableMachines}
                         usedProperties={['name']}
-                        apply={(data) => setAssignedMachines([...asignedMachines, ...data])}
+                        apply={(data) => {
+                            Promise.all(
+                                data.map(v=>axios.put(
+                                    "/equipment/assign",
+                                    {equipmentId:v._id, projectId}
+                                ))
+                            ).then(fetchMachines)
+                        }}
                     />
                 </div>
             }

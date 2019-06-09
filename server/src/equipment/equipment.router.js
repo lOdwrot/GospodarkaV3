@@ -31,7 +31,7 @@ router.delete('/', async (req,res) =>{
 })
 
 router.put('/assign', async (req, res) => {
-    res.json(await userControler.assignEquipment(req.body.equipmentId, req.body.projectId))
+    res.json(await equipmentControler.assignEquipment(req.body.equipmentId, req.body.projectId))
 })
 
 export default router
