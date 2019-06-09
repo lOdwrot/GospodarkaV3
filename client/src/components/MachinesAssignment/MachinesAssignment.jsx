@@ -3,7 +3,7 @@ import { List, Skeleton, Button } from 'antd';
 import AddModal from '../HelperComponents/AddModal';
 import axios from "axios"
 
-export default ({projectId="abc123"}) => {
+export default ({projectId}) => {
     const [asignedMachines, setAssignedMachines] = useState(null)
     const [availableMachines, setAvailableMachines] = useState([
         {name: 'Walec'},

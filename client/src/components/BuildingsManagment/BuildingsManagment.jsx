@@ -25,11 +25,11 @@ export default ({enableBuildingCreation, enableBuildingEdition}) => {
                 <div key={index}>
                     {
                         enableBuildingEdition &&
-                        <Link to={`/editdBuilding/:${v.id}`}>
+                        <Link to={`/editdBuilding/${v._id}`}>
                             <Button shape="circle" icon="edit"/>
                         </Link>
                     }
-                    <Link to={'/building'}>
+                    <Link to={`/building/${v._id}`}>
                         <Text code>{v.name}</Text>
                     </Link>
                 </div>

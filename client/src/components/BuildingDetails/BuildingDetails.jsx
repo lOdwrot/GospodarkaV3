@@ -19,7 +19,8 @@ const fields = [
 export default ({
     isEditMode=false,
     buildingId=null,
-    saveCallBack
+    saveCallBack,
+    projectId
 }) => {
     const [buildingDetails, setBuildingDetails] = useState(null)
     const [editedBuildingDetails, setEditedBuildingDetails] = useState(null)

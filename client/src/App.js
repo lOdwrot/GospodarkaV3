@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router';
 import { Layout } from './components/Layout';
 import { Counter } from './components/Counter';
@@ -13,22 +14,33 @@ import Boss from './Pages/Boss';
 import EditBuilding from './Pages/EditBuilding';
 import InventoryManagment from './components/InventoryManagment/InventoryManagment';
 import WorkersManagment from './components/WorkersManagment/WorkersManagment';
+import { Button } from 'antd';
 
 
-const App = ({userRole}) => {
+const App = (props) => {
+  console.log('Props', props)
   return (
-    <Layout>
-      <Route path='/counter' component={Counter} />
-      <Route path='/workerModule' component={WorkerPage} />
-      <Route path='/managerModule' component={Manager} />
-      <Route path='/bossModule' component={Boss} />
-      <Route path='/bossBuildingManagment' component={BossBuildingManagment} />
-      <Route path='/building' component={Building} />
-      <Route path='/inventory' component={InventoryManagment} />
-      <Route path='/workersManagments' component={WorkersManagment} />
-      <Route path='/editdBuilding/:id' component={EditBuilding} />
-      <Route exact path='/' component={Login} />
-    </Layout>)
+    <>
+      <Layout>
+          <Route exact path='/' component={Login} />
+          {
+            props.location.pathname != '/' &&
+            <Link to={`/`}>
+              <Button>Log Out</Button>
+            </Link>
+          }
+          <Route path='/counter' component={Counter} />
+          <Route path='/workerModule' component={WorkerPage} />
+          <Route path='/managerModule' component={Manager} />
+          <Route path='/bossModule' component={Boss} />
+          <Route path='/bossBuildingManagment' component={BossBuildingManagment} />
+          <Route path='/building/:id' component={Building} />
+          <Route path='/inventory' component={InventoryManagment} />
+          <Route path='/workersManagments' component={WorkersManagment} />
+          <Route path='/editdBuilding/:id' component={EditBuilding} />
+      </Layout>
+    </>
+    )
 
 
   // return userRole 
