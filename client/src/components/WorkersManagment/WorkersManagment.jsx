@@ -9,7 +9,7 @@ export default () => {
 
     const fetchWorkers = async () => {
         const resp = await axios.get('/user')
-        setWorkers(resp.data.filter(v => v.role === 'worker' || v.manager))
+        setWorkers(resp.data.filter(v => v.role === 'worker' || v.role === 'manager' ))
     }
 
     const deleteWorker = async (workerId) => {

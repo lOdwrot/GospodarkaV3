@@ -35,7 +35,7 @@ export default ({
     save,
     cancel
 }) => {
-    const [worker, setWorker] = useState({...templateWorker})
+    const [worker, setWorker] = useState({...templateWorker, role: templateWorker.role || "worker"})
 
     return (
         <Modal
@@ -77,8 +77,8 @@ export default ({
                         ))
                     }
                     <Checkbox 
-                        checked={worker.isManager} 
-                        onChange={() => setWorker({...worker, isManager: !worker.isManager})}
+                        checked={worker.role == 'manager'} 
+                        onChange={() => setWorker({...worker, role: worker.role == "manager" ? "worker" : "manager"})}
                     >
                         Manager
                     </Checkbox>

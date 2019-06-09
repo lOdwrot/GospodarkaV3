@@ -23,7 +23,7 @@ export const updateUser = async (data) => await getCollectionUser()
 
 export const insertUser = async (data) => await getCollectionUser()
                                                             .insertOne(
-                                                                { ...data, role: "worker" }
+                                                                data
                                                             )
 
 
