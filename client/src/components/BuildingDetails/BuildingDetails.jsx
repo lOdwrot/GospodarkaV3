@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Skeleton, Button, Input, Form, Select  } from 'antd';
+import axios from "axios"
 
 const Option = Select.Option
 const FormItem = Form.Item
@@ -27,23 +28,29 @@ export default ({
         {name: 'Bogdan', surname: 'Kowalski', id: '6'}
     ])
 
-    const fetchBuildingDetails = () => new Promise((resolve) => setTimeout(() => resolve(
-        {
-            name: 'Stadion',
-            location: 'Wrocław ul. Uławska 17',
-            imageURL: 'xxx'
-        }
-    ), 1000)).then((data) => {
-        setEditedBuildingDetails(data)
-        setBuildingDetails(data)
-    })
+    const fetchBuildingDetails = async () => {
+        const resp = await axios.get('/project')
+  
+        setEditedBuildingDetails(resp.data)
+        setBuildingDetails(resp.data)
+    }
+
+
+    const fetchavailableManagers = async () => {
+        const resp = await axios.get('/user')
+        setAvailableManagers(resp.data.filter(v => v.role === 'manager' ))
+    }
+
+
 
     useEffect(() => {
         if(!buildingId) {
             setEditedBuildingDetails({})
             setBuildingDetails({})
+            fetchavailableManagers()
         } else {
             fetchBuildingDetails()
+            fetchavailableManagers()
         }
     }, [])
 
@@ -80,7 +87,7 @@ export default ({
                                     value={editedBuildingDetails[v.apiName] || ''}
                                     onChange={(e) => {
                                         setSaveRequired(true)
-                                        setEditedBuildingDetails({...editedBuildingDetails, [v.apiName]: e.target.value})
+                                        setEditedBuildingDetails({...editedBuildingDetails, [v.apiName]: e.target.name})
                                     }}
                                     placeholder={v.label}
                                     disabled={!isEditMode}
