@@ -10,29 +10,28 @@ export default () => {
         const allInventory = resp.data
                                 .sort((a,b)=>a.name < b.name ? 1 : -1)
          setInventory(allInventory)
-
     })
 
     useEffect(() => {
         fetchInventory()
     }, [])
 
-    const addInventory = (inventory) =>{
+    const addInventory = (inventory) =>
         axios.post(
             "/equipment",
-            {name:inventory.name, projectId:null}
+            {...inventory, projectId:null}
         ).then(resp=>fetchInventory())
-    }
+    
 
-    const updateInventory = (inventory) =>{
+    const updateInventory = (inventory) =>
         axios.put(
             "/equipment",
-            {name:inventory}
+            inventory
         ).then(resp=>fetchInventory())
-    }
+    
 
     const replaceItemProperty = (id, property, value) => {
-        const itemIndex = inventory.findIndex(v => v.id === id)
+        const itemIndex = inventory.findIndex(v => v._id === id)
         const nextInventory = [...inventory]
         nextInventory[itemIndex] = {...nextInventory[itemIndex], [property]: value}
         setInventory(nextInventory)
@@ -46,41 +45,26 @@ export default () => {
         sortDirections: ['descend', 'ascend'],
         render: (value, row, index) => (
             <Input
-                disabled={row.id && !editedItems.includes(row.id)}
+                disabled={row._id && !editedItems.includes(row._id)}
                 value={value}
-                onChange={(e) => replaceItemProperty(row.id, 'name', e.target.value)}
+                onChange={(e) => replaceItemProperty(row._id, 'name', e.target.value)}
             />
         )
       }, {
-        title: 'Quantity',
-        dataIndex: 'quantity',
-        key: 'quantity',
-        render: (value, row, index) => (
-            <InputNumber
-                disabled={row.id && !editedItems.includes(row.id)}
-                value={value}
-                onChange={(v) => replaceItemProperty(row.id, 'quantity', v)}
-            />
-        )
-    }, {
         title: 'Actions',
-        dataIndex: 'id',
-        key: 'id',
-        render: (value, row, index) => (!row.id || editedItems.includes(row.id))
+        dataIndex: '_id',
+        key: '_id',
+        render: (value, row, index) => (!row._id || editedItems.includes(row._id))
             ? <Button icon='save' onClick={() => {
-                setEditedItems(editedItems.filter(v => v !== value))
+                const savePromise = !row._id 
+                                    ? addInventory(row)
+                                    :  updateInventory(row)
+                
+                savePromise.then(fetchInventory)
+                setEditedItems(editedItems.filter(v => v != row._id ))
             }}/>
             : <Button icon='edit' onClick={() => setEditedItems([...editedItems, value])}/>
     }]
-
-    // const fetchInventory = () => new Promise((resolve) => setTimeout(() => resolve(
-    //     [
-    //         {name: 'Koparka', quantity: 3, id: '1'},
-    //         {name: 'Dzwig', quantity: 1, id: '2'},
-    //         {name: 'Walec', quantity: 3, id: '3'},
-    //     ]
-    // ), 1000)).then(setInventory)
-
 
     if(!inventory) return <Skeleton/>
 
@@ -95,7 +79,7 @@ export default () => {
                 icon='plus' 
                 style={{width: '100%'}} 
                 onClick={() => setInventory([...inventory, {}])}
-                disabled={inventory.some(v => !v.id)}
+                disabled={inventory.some(v => !v._id)}
             />
         </div>
     )
