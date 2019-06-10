@@ -26,7 +26,6 @@ export default () => {
         const resp = await axios.post('/orders/submit', {
             userId, mealId
         })
-        debugger
         setSaved(true)
     }
 

@@ -20,24 +20,57 @@ export default ({enableBuildingCreation, enableBuildingEdition}) => {
 
     return buildings ?
     (
-        <div>
-            {buildings.map((v, index) => (
-                <div key={index}>
-                    {
-                        enableBuildingEdition &&
-                        <Link to={`/editdBuilding/${v._id}`}>
-                            <Button shape="circle" icon="edit"/>
-                        </Link>
-                    }
-                    <Link to={`/building/${v._id}`}>
-                        <Text code>{v.name}</Text>
-                    </Link>
+        <div id="container">
+                <div className="topheader">
+                    Manager Panel
                 </div>
-            ))}
-            {
-                enableBuildingCreation &&
-                <BuildingCreationModal fetchBuildings={fetchBuildings}/>
-            }
+                <div className="bu-list">
+                    {buildings.map((v, index) => (
+                        <div className="buttons-build" key={index}>
+                            {
+                                enableBuildingEdition &&
+                                <Link to={`/editdBuilding/${v._id}`}>
+                                    <Button shape="circle" icon="edit" />
+                                </Link>
+                            }
+                            <Link to={`/building/${v._id}`}>
+                                <Text code>{v.name}</Text>
+                            </Link>
+                        </div>
+                    ))}
+                    {
+                         enableBuildingCreation &&
+                        <BuildingCreationModal fetchBuildings={fetchBuildings}/>
+                    }
+                </div>
+            
         </div>
+
+
+        
+        // <div id="container">
+        //     <div className="topheader">
+        //             Manager Panel
+        //     </div>
+        //     <div className="bu-list">
+        //     {buildings.map((v, index) => (
+        //         <div className="bu-list" key={index}>
+        //             {
+        //                 enableBuildingEdition &&
+        //                 <Link to={`/editdBuilding/${v._id}`}>
+        //                     <Button shape="circle" icon="edit"/>
+        //                 </Link>
+        //             }
+        //             <Link to={`/building/${v._id}`}>
+        //                 <Text code>{v.name}</Text>
+        //             </Link>
+        //         </div>
+        //     ))}
+        //     {
+        //         enableBuildingCreation &&
+        //         <BuildingCreationModal fetchBuildings={fetchBuildings}/>
+        //     }
+        // </div>
+        // </div>
     ) : <Skeleton/>
 } 

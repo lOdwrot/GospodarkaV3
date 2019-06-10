@@ -39,7 +39,7 @@ export default ({
         <div>
             <div className={styles['container']}>
                 <div className={'frame-item'}>
-                    Here Will Be App Logo
+                   <img src = "https://i.pinimg.com/236x/2a/f5/97/2af597e917d9a97fa889e71d536a1ca9--work-at-home-jobs-jobs-in.jpg" alt="Here Will Be App Logo" />
                 </div>               
                 <div className={'frame-item'}>
                     <div style={{width: '100%', color: 'red', textAlign: 'center'}}>

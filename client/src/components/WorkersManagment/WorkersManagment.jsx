@@ -80,25 +80,32 @@ export default () => {
     if(!workers) return <Skeleton/>
 
     return (
-        <div style={{maxHeight: '500px', overflowY: 'auto'}}>
-            {
-                editedWorker &&
-                <WorkerEdition
-                    templateWorker={editedWorker}
-                    cancel={() => setEditedWorker(null)}
-                    save={saveWorker}
+        <div id="container">
+            <div className="topheader">
+                Manage Workers
+            </div>
+
+            <div style={{maxHeight: '500px', overflowY: 'auto'}}>
+                {
+                    editedWorker &&
+                    <WorkerEdition
+                        templateWorker={editedWorker}
+                        cancel={() => setEditedWorker(null)}
+                        save={saveWorker}
+                    />
+                }
+                <Table 
+                    pagination={false}
+                    columns={columns} 
+                    dataSource={workers}
                 />
-            }
-            <Table 
-                pagination={false}
-                columns={columns} 
-                dataSource={workers}
-            />
-            <Button 
-                onClick={() => setEditedWorker({})}
-                icon='plus' 
-                style={{width: '100%'}}
-            />
-        </div>
+                <Button 
+                    onClick={() => setEditedWorker({})}
+                    icon='plus' 
+                    style={{width: '100%'}}
+                />
+            </div>
+         </div>
+
     )
 }

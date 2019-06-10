@@ -13,7 +13,7 @@ export default ({projectId, isEditIcon=false, fetchBuildings}) => {
 
     return (
         <>
-            <Button onClick={openModal}>Create Building</Button>
+            <Button id="create-building" onClick={openModal}>Create Building</Button>
             <Modal
                 title="Create Building"
                 visible={isOpen}

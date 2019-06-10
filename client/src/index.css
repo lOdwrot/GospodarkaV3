@@ -2,6 +2,7 @@
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
     body {
         padding-top: 50px;
+        box-sizing: border-box;
     }
 }
 
@@ -12,10 +13,11 @@
     border: 1px solid rgb(232, 232, 232);
     background: white;
     margin-bottom: 40px;
+    margin-right: 20%;
 }
 
 .tab-container {
-    width: 100%;
+    width: 400px;
     padding: 10px;
     display: flex; 
     justify-content: center; 
@@ -23,8 +25,7 @@
     flex-direction: column;
     border: 1px solid rgb(232, 232, 232);
     border-radius: 15px;
-    max-height: 85vh;
-    overflow-y: auto;
+    background-color: white;
 }
 
 .image-container{

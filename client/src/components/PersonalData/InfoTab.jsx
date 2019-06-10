@@ -88,7 +88,11 @@ export default ({
     ]
 
     return (
-        <div className={'tab-container'}>
+        <div className={'tab-container'} style={{ textAlign: 'center' }}>
+            <div>
+                Personal Data
+            </div>
+
             <div
                 className={'image-container'}
                 style={{backgroundImage: `url(${imageURL})`}}

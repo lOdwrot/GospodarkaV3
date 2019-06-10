@@ -69,18 +69,24 @@ export default () => {
     if(!inventory) return <Skeleton/>
 
     return (
-        <div>
-            <Table 
-                pagination={false}
-                columns={columns} 
-                dataSource={inventory}
-            />
-            <Button 
-                icon='plus' 
-                style={{width: '100%'}} 
-                onClick={() => setInventory([...inventory, {}])}
-                disabled={inventory.some(v => !v._id)}
-            />
+        <div id="container">
+            <div className="topheader">
+                Manage Inventory
+             </div>
+
+            <div>
+                <Table 
+                    pagination={false}
+                    columns={columns} 
+                    dataSource={inventory}
+                />
+                <Button 
+                    icon='plus' 
+                    style={{width: '100%'}} 
+                    onClick={() => setInventory([...inventory, {}])}
+                    disabled={inventory.some(v => !v._id)}
+                />
+            </div>
         </div>
     )
 }

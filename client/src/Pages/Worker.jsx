@@ -7,13 +7,20 @@ import styles from './Pages.module.scss'
 export default () => {
     return (
         (
-            <div className={styles['worker']}>
-                <div className={styles['user-info']}>
-                    <PersonalData/>
+            <div id="container">
+                <div className="topheader">
+                    Worker Panel
                 </div>
-                <div>
-                    <Meals/>
-                    <Agreements/>
+                <div className="bu-list">
+                    <div style={{display: 'flex'}}>
+                            <div style={{display: 'flex'}}>
+                                <PersonalData/>
+                                <div className="placed-flex">
+                                    <Meals/>
+                                    <Agreements/>
+                                </div>
+                            </div>
+                    </div>
                 </div>
             </div>
         )

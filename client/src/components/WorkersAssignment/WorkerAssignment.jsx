@@ -40,6 +40,7 @@ export default ({projectId}) => {
             {
                 asignedWorkers &&
                 <div style={{maxWidth: '400px', minWidth: '300px'}}>
+                    <div className="building-flex">
                     <List
                         header={<div>Asigned Workers</div>}
                         bordered
@@ -65,6 +66,7 @@ export default ({projectId}) => {
                             ).then(fetchWorkers)
                         }}
                     />
+                </div>
                 </div>
             }
         </>

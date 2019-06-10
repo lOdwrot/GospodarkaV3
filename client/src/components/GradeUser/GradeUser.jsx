@@ -39,7 +39,7 @@ export default () => {
 
     return (
         <>
-            <Button onClick={openModal}>
+            <Button id="button-GW" onClick={openModal}>
                 Grade User
             </Button>
             <Modal

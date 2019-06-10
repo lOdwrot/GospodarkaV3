@@ -1,34 +1,159 @@
-#container
-{
-	width: 400px;
-	padding: 60px;
-	margin-left: auto;
-	margin-right:auto;
-	margin-top: 80px;
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap&subset=latin-ext');
+
+#container {
+    width: 100%;
+    padding: 60px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-h1
-{
-    letter-spacing: 2px
+.topheader {
+    letter-spacing: 4px;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: solid;
+    text-align: center;
+}
+
+.bu-list {
+    padding: 20px;
+    background-color: #d8d6d6;
+    -webkit-box-shadow: 3px 3px 50px 5px rgba(204,204,204,0.9);
+    -moz-box-shadow: 3px 3px 50px 5px rgba(204,204,204,0.9);
+    box-shadow: 3px 3px 50px 5px rgba(204,204,204,0.9);
+}
+
+.buttons-build {
+    border-radius: 6px;
+    letter-spacing: 4px;
+    margin-top: 20px;
+    display: grid;
+}
+
+.buttons-build > a > span > code {
+     background-color: white;
+     color: grey;
+     font-family: 'inherit', sans-serif;
+     margin-left: auto;
+     margin-right: auto;
+     font-size: 18px;
+     padding: 5px;
+     display: grid;
+     border: solid;
+}
+
+.buttons-build > a:hover > span > code {
+     background-color: #73acdd;
+     color: white;
+     font-family: 'inherit', sans-serif;
+}
+
+.GU > button {
+    width: 200px;
+    margin-left: 60px;
+    padding: 5px;
+}
+
+.text {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+}
+
+.build {
+    font-size: 3vw;
+    margin-bottom: 6vh;
+}
+
+.add-items {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-building {
+    margin-top: 40px;
+    margin-left: 2px;
+    width: 250px;
 }
 
 #button {
- 
-    /*Krok 2: Podstawowe style*/
-    display: block;
+    border-radius: 4px;
+    letter-spacing: 4px;
+    margin-top: 10px;
+    display: grid;
+    background-color: white;
+    color: grey;
+    font-family: 'inherit', sans-serif;
+    font-size: 18px;
+    border: solid;
+    width: 100%;
     height: 40px;
-    width: 250px;
-    background: #1E9DFF;
-	font-size: 18px;
-	color: white;
-    /*border: 2px solid rgba(65, 63, 191, 0.59);*/
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	letter-spacing: 2px;
+    line-height: 40px;
+    white-space: nowrap;
+}
+#button-GW {
+    font-size: 15px;
+    padding: 3px 15px;
+    border: 3px solid gray;
+    letter-spacing: 4px;
+
+    transition: .3s;
 }
 
-#button:hover
-{
-	background-color: #0067E5;
+    #button-GW:hover {
+        background-color: #73acdd;
+        color: white;
+        border: 3px solid #73acdd;
+    }
+
+ant-checkbox-wrapper {
+    margin: 10px;
+}
+
+.button.ant-btn {
+    letter-spacing: 3px;
+    font-family: 'Lato', sans-serif;
+}
+
+#button:hover {
+    background-color: #73acdd;
+    color: white;
+    font-family: 'inherit', sans-serif;
+}
+#create-building {
+    margin-top: 40px;
+    font-size: 15px;
+    padding: 3px 15px;
+    border: 3px solid gray;
+    letter-spacing: 3px;
+    transition: .3s;
+}
+
+    #create-building:hover {
+        background-color: #73acdd;
+        color: white;
+        border: 3px solid #73acdd;
+    }
+
+    .placed-flex {
+        margin-left: 250px;
+        margin-bottom: auto;
+        margin-top: auto;
+    }
+
+.placed-flex-button {
+    margin-bottom: auto;
+    margin-top: auto;
+    margin-left: 35px;
+}
+
+.building-flex {
+    background-color: white;
+}
+
+.schema-inline {
+    display:block;
 }
