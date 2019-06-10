@@ -15,6 +15,14 @@ const fields = [
         label: 'Location',
         apiName: 'location',
     },
+    {
+        label: 'Poczatek',
+        apiName: 'startDate',
+    },
+    {
+        label: 'Koniec',
+        apiName: 'endDate',
+    },
 ]
 
 export default ({
