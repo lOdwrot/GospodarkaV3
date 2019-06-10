@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Skeleton, Button, Input, Form, Select  } from 'antd';
 import axios from "axios"
+import history from '../../history'
 
 const Option = Select.Option
 const FormItem = Form.Item
@@ -17,6 +18,7 @@ const fields = [
 ]
 
 export default ({
+    isPopUp,
     isEditMode=false,
     projectId=null,
     saveCallBack
@@ -35,6 +37,10 @@ export default ({
         
     }
 
+    const addBuildingDetalis = async () => {
+        const resp = await axios.post('/project', editedBuildingDetails)
+        fetchBuildingDetails()
+    }
     
     const updateBuildingDetalis = async () => {
         const resp = await axios.put('/project', editedBuildingDetails)
@@ -46,9 +52,11 @@ export default ({
         setAvailableManagers(resp.data.filter(v => v.role === 'manager' ))
     }
 
-
-
-    useEffect(() => {
+    const init = () => {
+        // setBuildingDetails(null)
+        // setEditedBuildingDetails(null)
+        // setSaveRequired(false)
+        // setAvailableManagers([])
         if(!projectId) {
             setEditedBuildingDetails({})
             setBuildingDetails({})
@@ -57,7 +65,16 @@ export default ({
             fetchBuildingDetails()
             fetchavailableManagers()
         }
+    }
+
+    useEffect(() => {
+        init()
     }, [])
+
+    if(!editedBuildingDetails) {
+        init()
+        return null
+    }
 
     return (
         <>
@@ -69,7 +86,7 @@ export default ({
                 buildingDetails &&
                 <div className={'tab-container'}>
                     <div
-                        className={'image-container'}
+                        className={'image-containeditedBuildingDetailser'}
                         style={{backgroundImage: `url(${buildingDetails.imageURL})`}}
                     />
                     {
@@ -115,10 +132,17 @@ export default ({
                             <Button onClick={() => {
                                 setEditedBuildingDetails(buildingDetails)
                                 setSaveRequired(false)
+                                if(isPopUp) return window.location.reload()
+                                history.goBack()
                                 saveCallBack && saveCallBack(editedBuildingDetails)
                             }}>Cancel</Button>
                             <Button onClick={() => {
-                                updateBuildingDetalis(buildingDetails)
+                                buildingDetails._id
+                                ? updateBuildingDetalis(buildingDetails)
+                                : addBuildingDetalis()
+                                if(isPopUp) return window.location.reload()
+                                history.goBack()
+                                saveCallBack && saveCallBack()
                             }} disabled={!saveRequired}>Save</Button>
                         </div>
                     }

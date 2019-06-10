@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import { Button, Modal} from 'antd'
 import BuildingDetails from '../BuildingDetails/BuildingDetails';
 
-export default ({projectId, isEditIcon=false}) => {
+export default ({projectId, isEditIcon=false, fetchBuildings}) => {
     const [isOpen, setOpen] = useState(false)
-
-    const cloaseModal = () => setOpen(false)
+    
+    const cloaseModal = () => {
+        setOpen(false)
+        fetchBuildings()
+    }
     const openModal = () => setOpen(true)
 
     return (
@@ -19,6 +22,7 @@ export default ({projectId, isEditIcon=false}) => {
             >
                 <div style={{display: 'flex'}}>
                     <BuildingDetails
+                        isPopUp={true}
                         isEditMode={true}
                         projectId={projectId}
                         saveCallBack={cloaseModal}

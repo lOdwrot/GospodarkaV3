@@ -10,6 +10,8 @@ const mapStateToProps = (state) => ({
         currentBuild: state.personalData.user.currentBuild,
         imageURL: state.personalData.user.imageURL,
         mail: state.personalData.user.mail,
+        projectId: state.personalData.user.projectId,
+        _id: state.personalData.user._id
     }
   })
   

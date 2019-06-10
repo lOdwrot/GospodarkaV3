@@ -1,26 +1,65 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Input, Button, Form } from 'antd'
-
+import axios from 'axios'
+import store from '../../storage/index'
+import { setUser } from '../../storage/personalData/personalData.reducer';
 const FormItem = Form.Item
 
 export default ({
+    _id,
     name,
     surname,
     grade,
     managerName,
     currentBuild,
     imageURL,
-    mail
+    mail,
+    projectId
 }) => {
     const [isEditMode, setEditMode] = useState(false)
     const [editedName, setName] = useState(name)
     const [editedSurname, setSurname] = useState(surname)
     const [editedMail, setMail] = useState(mail)
+    const [buildingName, setBuildingName] = useState('')
+    const [managerData, setManagerData] = useState({})
 
     const cancelEdit = () => {
+        fetchUserData()
+    }
+
+    const fetchUserData = () => {
+        axios.post('/user/getUser', {userId: _id}).then((resp) => {
+            store.dispatch(setUser(resp.data))
+            setSurname(resp.data.surname)
+            setName(resp.data.name)
+        })
         setEditMode(false)
-        setName(name)
-        setSurname(surname)
+    }
+
+    const initFetch = async () => {
+        console.log('# ProjectId:', projectId)
+        if(!projectId) return
+        const projectResp = await axios.post('/project/getProject', {projectId})
+        setBuildingName(projectResp.data.name)
+        const userResp = await axios.post('/user/getUser', {userId: projectResp.data.managerId})
+        setManagerData(userResp.data)
+    }
+    
+    useEffect(() => {
+        initFetch()
+    }, [])
+
+    const updateUserData = () => {
+        axios.put('/user/', {
+            _id,
+            name: editedName,
+            surname: editedSurname,
+            grade,
+            managerName,
+            currentBuild,
+            imageURL,
+            mail
+        }).then(() => setEditMode(false))
     }
 
     const editableFields = [
@@ -45,14 +84,6 @@ export default ({
         {
             label: 'Grade',
             value: grade
-        },
-        {
-            label: 'Manager Name',
-            value: managerName
-        },
-        {
-            label: 'Current Build',
-            value: currentBuild
         }
     ]
 
@@ -85,6 +116,18 @@ export default ({
                     </FormItem>
                 ))
             }
+            <FormItem help={'Building'}>
+                <Input
+                    value={buildingName}
+                    disabled={true}
+                />
+            </FormItem>
+            <FormItem help={'Manager'}>
+                <Input
+                    value={`${managerData.name || ''} ${managerData.surname || ''}`}
+                    disabled={true}
+                />
+            </FormItem>
             <div>
                 {
                     !isEditMode &&
@@ -96,7 +139,7 @@ export default ({
                 }
                 {
                     isEditMode &&
-                    <Button>Save</Button>
+                    <Button onClick={updateUserData}>Save</Button>
                 }
             </div>
         </div>

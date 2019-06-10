@@ -19,7 +19,7 @@ export default () => {
         const allWorkers = resp.data
                                 .filter(v=>v.role == "worker")
                                 .sort((a,b)=>a.surname < b.surname ? 1 : -1)
-        setAvailableWorkers(allWorkers.filter(v=> v.projectId == null ))
+        setAvailableWorkers(allWorkers)//.filter(v=> v.projectId == null ))
 
     })
 

@@ -36,7 +36,7 @@ export default ({enableBuildingCreation, enableBuildingEdition}) => {
             ))}
             {
                 enableBuildingCreation &&
-                <BuildingCreationModal/>
+                <BuildingCreationModal fetchBuildings={fetchBuildings}/>
             }
         </div>
     ) : <Skeleton/>
