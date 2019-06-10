@@ -26,3 +26,8 @@ db.getCollection('EQUIPMENT').insertMany([
     {"name":"Betoniarka 1", "projectId": null},
     {"name":"Walec czerwony", "projectId": null}
 ])
+
+db.getCollection('DOCUMENT').insertMany([
+    {"name":"Regulamin", "url":"https://drive.google.com/file/d/1n1iESEvZH98EZdVMLXjX3XhYUYuDskMU/view?usp=sharing"},
+    {"name":"RODO", "url":"https://drive.google.com/file/d/1aN50k76G8icjftUrATBZ_6xIe2S7iCDx/view?usp=sharing"}
+])

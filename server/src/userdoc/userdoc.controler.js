@@ -5,6 +5,9 @@ export const getAllUserDocs = async () => await getCollectionUserDoc()
                                                 .find()
                                                 .toArray()
 
+export const getAllDocsForUser = async (userId) => await getCollectionUserDoc()
+                                                .find({userId})
+                                                .toArray()
 
 export const getUserDoc = async (userDocId) => await getCollectionUserDoc()
                                                        .findOne(

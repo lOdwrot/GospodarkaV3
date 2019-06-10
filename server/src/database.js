@@ -34,6 +34,12 @@ const initEquipments = (collection) => {
     {"name":"Walec czerwony", "projectId": null}
   ])
 }
+const initDocuments = (collection) => {
+  collection.insertMany([
+    {"name":"Regulamin", "url":"https://drive.google.com/file/d/1n1iESEvZH98EZdVMLXjX3XhYUYuDskMU/view?usp=sharing"},
+    {"name":"RODO", "url":"https://drive.google.com/file/d/1aN50k76G8icjftUrATBZ_6xIe2S7iCDx/view?usp=sharing"}
+  ])
+}
 
 export const connect = ({DB_USER, DB_PASSWORD, DB_PORT, DB_NAME}) => {
   const address = `mongodb://${DB_USER ? `${DB_USER}:${DB_PASSWORD}@` : ''}localhost:${DB_PORT}`
@@ -60,7 +66,7 @@ export const connect = ({DB_USER, DB_PASSWORD, DB_PORT, DB_NAME}) => {
           if(IS_INIT) initEquipments(collection)
         })
         db.createCollection('DOCUMENT', (err, collection) => {
-          
+          if(IS_INIT) initDocuments(collection)
         })
         db.createCollection('USERDOC', (err, collection) => {
           

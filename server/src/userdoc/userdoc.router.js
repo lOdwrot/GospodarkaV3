@@ -12,6 +12,11 @@ router.post('/getUser', async (req, res) => {
     res.json(await userdocControler.getUserDoc(req.body.userdocId))
 })
 
+router.get('/:userId', async (req, res) => {
+    const {userId} = req.params
+    res.send(await userdocControler.getAllDocsForUser(userId))
+})
+
 router.get('/', async (req, res) => {
     res.send(await userdocControler.getAllUserDocs())
 })
