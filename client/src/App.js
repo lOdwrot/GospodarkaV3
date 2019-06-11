@@ -21,7 +21,7 @@ const App = (props) => {
   console.log('Props', props)
   return (
     <>
-      <Layout>
+      <div>
           <Route exact path='/' component={Login} />
           {
             props.location.pathname != '/' &&
@@ -38,7 +38,7 @@ const App = (props) => {
           <Route path='/inventory' component={InventoryManagment} />
           <Route path='/workersManagments' component={WorkersManagment} />
           <Route path='/editdBuilding/:id' component={EditBuilding} />
-      </Layout>
+      </div>
     </>
     )
 
